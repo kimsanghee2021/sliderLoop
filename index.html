@@ -7,8 +7,8 @@
     <title>sliderLoop</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/anime.js"></script>
-    <script defer src="js/slider.js"></script>
-    <!-- <script src="js/slider_es5.js"></script> -->
+    <!-- <script defer src="js/slider.js"></script> -->
+    <script src="js/slider_es5.js"></script>
     <!-- <script src="js/slider_es6.js"></script> -->
 </head>
 <body>
@@ -19,11 +19,22 @@
             <li data-index="3">TEXT3</li>
             <li data-index="4">TEXT4</li>
         </ul>
-        <a href="#" class="prev"><img src="img/btnPrev.png"></a>
-        <a href="#" class="next"><img src="img/btnNext.png"></a>
+
     </article>
+    <section class="phone">
+        <article id="slider2">
+            <ul>
+                <li data-index="1">TEXT1</li>
+                <li data-index="2">TEXT2</li>
+                <li data-index="3">TEXT3</li>
+                <li data-index="4">TEXT4</li>
+            </ul>
+        </article>
+    </section>
+    <a href="#" class="prev"><img src="img/btnPrev.png"></a>
+    <a href="#" class="next"><img src="img/btnNext.png"></a>
     <script>
-        //new Slider();
+        new Slider();
     </script>
 </body>
 </html>

@@ -13,11 +13,12 @@ a {
 }
 
 #slider {
-  width: 400px;
-  height: 200px;
-  border: 5px solid #000;
-  margin: 100px auto;
-  position: relative;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  margin: 0 auto;
+  position: fixed;
   overflow: hidden;
 }
 #slider ul {
@@ -47,17 +48,65 @@ a {
 #slider ul li[data-index="4"] {
   background-color: greenyellow;
 }
-#slider .prev {
+
+.prev {
   position: absolute;
   left: 50px;
   top: 50%;
   margin-top: -50px;
 }
-#slider .next {
+
+.next {
   position: absolute;
   right: 50px;
   top: 50%;
   margin-top: -50px;
+}
+
+.phone {
+  width: 450px;
+  height: 787px;
+  background: url(../img/bgPhone.png) no-repeat 0 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -225px;
+  margin-top: -393px;
+}
+.phone #slider2 {
+  width: 250px;
+  height: 445px;
+  top: 173px;
+  left: 99px;
+  position: absolute;
+  overflow: hidden;
+}
+.phone #slider2 ul {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.phone #slider2 ul li {
+  height: 100%;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 60px;
+  color: #fff;
+}
+.phone #slider2 ul li[data-index="1"] {
+  background-color: hotpink;
+}
+.phone #slider2 ul li[data-index="2"] {
+  background-color: orange;
+}
+.phone #slider2 ul li[data-index="3"] {
+  background-color: aqua;
+}
+.phone #slider2 ul li[data-index="4"] {
+  background-color: greenyellow;
 }
 
 /*# sourceMappingURL=style.css.map */
