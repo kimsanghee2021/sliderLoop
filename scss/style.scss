@@ -9,9 +9,9 @@ a{text-decoration: none;}
     width:400px; height:200px; border:5px solid #000;
     margin:100px auto; position: relative;overflow:hidden;
     ul{
-        width:calc(100% * 4); height:100%; position: absolute; top:0; left:0; 
+        height:100%; position: absolute; top:0; left:0; 
         li{
-            width:calc(100% / 4); height:100%; float:left; display: flex; justify-content: center;
+            height:100%; float:left; display: flex; justify-content: center;
             align-items: center; font-size:40px; color:#fff;
             &[data-index='1']{background-color: hotpink;}
             &[data-index='2']{background-color: orange;}

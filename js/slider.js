@@ -1,11 +1,13 @@
 const slider = document.querySelector('#slider');
 const ul = slider.querySelector('ul');
+const lis = ul.querySelectorAll('li');
 const prev = slider.querySelector('.prev');
 const next = slider.querySelector('.next');
 const speed = 500;
+const len = ul.children.length;
 let enableClick = true;
-ul.style.left = '-100%';
 
+init();
 //무한 루프 만들기
 next.addEventListener('click',function(e){
     e.preventDefault();
@@ -25,14 +27,23 @@ prev.addEventListener('click',function(e){
     }
 });
 
-//공통 슬라이드 함수
+
+function init(){
+    //반복 돌기위해 첫번째 화면을 뒤로 보내라
+    ul.style.left = '-100%';
+    //li가 추가될떄마다 ul의 넓이 값이 변경될 수 있도록 작업
+    ul.style.width = `${100*len}%`;
+    lis.forEach(function(li){
+         //li가 추가될떄마다 li의 각각의 넓이 값이 변경될 수 있도록 작업
+        li.style.width = `${100/len}%`
+    });
+    ul.prepend(ul.lastElementChild);
+}
+
 function slide(direction){
     let result = {value : '', callback : null}
-
-    //인수로 'next',prev' 일 경우 result값 변경
     if(direction == 'next'){
         result.value = '-200%';
-        //콜백함수로 감싸준이유는 즉시실행하는것이 아니라 해당하는곳에 왓을때 실행시키기 위해 callback 함수로 넣어준다.
         result.callback = ()=>{ul.append(ul.firstElementChild)};
     }
     else if(direction == 'prev'){
@@ -53,29 +64,3 @@ function slide(direction){
         }
     });
 }
-/*
-function nextSlide(){
-    new Anim(ul,{
-        prop : 'left',
-        value : '-200%',
-        duration : speed,
-        callback : function(){
-            ul.append(ul.firstElementChild);
-            ul.style.left = '-100%';
-            enableClick = true;
-        }
-    });
-}
-function prevSlide(){
-    new Anim(ul,{
-        prop : 'left',
-        value : '0%',
-        duration : speed,
-        callback : function(){
-            ul.prepend(ul.lastElementChild); 
-            ul.style.left = '-100%';
-            enableClick = true;
-        }
-    });
-}
-*/

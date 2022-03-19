@@ -21,14 +21,12 @@ a {
   overflow: hidden;
 }
 #slider ul {
-  width: 400%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
 }
 #slider ul li {
-  width: 25%;
   height: 100%;
   float: left;
   display: flex;
