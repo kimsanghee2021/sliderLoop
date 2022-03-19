@@ -1,52 +1,53 @@
-function Slider(){
-    this.init1();
-    this.init2(this.slider1);
-    this.init2(this.slider2);
-    this.slide(frame,direction);
-    this.next();
-    this.prev();
+function Slider(selector,opt){
+  let default_opt = {
+    btnPrev : '.prev',
+    btnNext : '.next',
+    speed : 500
+  }
+  const result_opt = Object.assign({}, default_opt, opt);
+    this.initialize(selector,result_opt);
+    this.bindingEvent();
+
 }
-Slider.prototype.init1 = function(){
-    this.slider1 = document.querySelector('#slider');
-    this.slider2 = document.querySelector('#slider2');
-    this.prev = document.querySelector('.prev');
-    this.next = document.querySelector('.next');
-    this.speed = 500;
+
+Slider.prototype.initialize = function(selector ,opt){
+    this.frame = document.querySelector(selector);
+    this.prev = document.querySelector(opt.btnPrev);
+    this.next = document.querySelector(opt.btnNext);
+    this.speed = opt.speed;
     this.enableClick = true;
 }
 
-Slider.prototype.init2 = function(frame){
-  this.ul = frame.querySelector('ul');
-  this.lis = this.ul.querySelectorAll('li');
-  this.len = this.ul.children.length;
-  this.ul.style.left = '-100%';
-  this.ul.style.width = `${100*this.len}%`;
-  this.lis.forEach (li =>li.style.width = `${100/this.len}%`);
-  this.ul.prepend(this.ul.lastElementChild);
+Slider.prototype.bindingEvent = function(){
+  this.init(this.frame);
+
+  this.next.addEventListener('click',function(e){
+      e.preventDefault();
+      if(this.enableClick){
+          this.enableClick = false;
+          this.slide(this.frame,'next');
+      }
+  }.bind(this));
+
+  this.prev.addEventListener('click',function(e){
+      e.preventDefault();
+      if(this.enableClick){
+          this.enableClick = false;
+          this.slide(this.frame,'prev');
+      }
+  }.bind(this));
 }
 
-Slider.prototype.next = function(){
-  this.next.addEventListener('click',e => {
-    e.preventDefault();
-
-    if(enableClick){
-        enableClick = false;
-        slide(slider1,'next');
-        slide(slider2,'next');
-    }
-  });
+Slider.prototype.init = function(frame){
+  const ul = frame.querySelector('ul');
+  const lis = ul.querySelectorAll('li');
+  const len = ul.children.length;
+  ul.style.left = '-100%';
+  ul.style.width = `${100*len}%`;
+  lis.forEach (li =>li.style.width = `${100/len}%`);
+  ul.prepend(ul.lastElementChild);
 }
-Slider.prototype.prev = function(){
-  this.prev.addEventListener('click',e => {
-    e.preventDefault();
 
-    if(enableClick){
-        enableClick = false;
-        slide(slider1,'prev');
-        slide(slider2,'prev');
-    }
-  });
-}
 Slider.prototype.slide = function(frame,direction){
     const ul = frame.querySelector('ul');
     let result =  {
@@ -54,11 +55,11 @@ Slider.prototype.slide = function(frame,direction){
     }
     if(direction === 'next'){
         result.value = '-200%';
-        result.callback = ()=>{ ul.append(ul.firstElementChild)}
+        result.callback = function(){ ul.append(ul.firstElementChild)}
     }
     else if(direction === 'prev'){
         result.value = '0%';
-        result.callback = ()=>{ ul.prepend(ul.lastElementChild)}
+        result.callback = function(){ ul.prepend(ul.lastElementChild)}
     }
     else {
       alert ('인수는 prev, next둘중 하나가 들어와야 합니다.')
@@ -67,11 +68,11 @@ Slider.prototype.slide = function(frame,direction){
       prop: 'left',
       value: result.value,
       duration: this.speed,
-      callback: () => {      
+      callback: function(){      
         result.callback();
         ul.style.left = '-100%';
-        enableClick = true;
-      }
+        this.enableClick = true;
+      }.bind(this)
     })
   
 }

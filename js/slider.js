@@ -28,7 +28,6 @@ prev.addEventListener('click',e => {
     }
 });
 
-
 function init(frame){
     const ul = frame.querySelector('ul');
     const lis = ul.querySelectorAll('li');
