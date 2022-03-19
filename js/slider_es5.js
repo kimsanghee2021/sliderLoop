@@ -1,3 +1,15 @@
+/*
+  es5객체지향 변환순서
+  1. 생성자 함수 생성
+  2. 생성자 함수 안쪽에 this.init(),this.bindingEvent()호출
+  3. this.init안쪽 전역변수값을 this로 붙여서 인스턴스 전달
+  4. 나머지 모든 함수들을 생성자.prototype에 등록
+  5. 각 함수 안쪽에 있는 모든 전역변수값을 this.을 붙여서 인스턴스로 변경
+  6. event, each문 ajex, setTimeout, callback, 안쪽에 this값을 인스턴스로 고정시키기위해 
+      해당 함수 뒤쪽에 .bind(this)연결
+  7. 해당 생성자 함수를 new인스턴스 생성
+*/
+
 function Slider(selector,opt){
   let default_opt = {
     btnPrev : '.prev',
